@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.all(8),
                         children: List.generate(
                             5,
-                            (int index) => Icon(index < 3
+                            (int index) => Icon(index < _counter
                                 ? Icons.favorite
                                 : Icons.favorite_border),
                             growable: true))))
@@ -129,9 +129,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // in the middle of the parent.
           //OptionMenu()
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
             DashboardStats(),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+            ),
             Flexible(child: OptionMenu())
           ])),
 
