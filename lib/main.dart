@@ -102,7 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget OptionMenu() {
     return GridView.count(
+        primary: false,
         crossAxisCount: 2,
+        padding: const EdgeInsets.all(20),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
         children: List.generate(6, (index) {
           return Center(
               child: Column(
@@ -131,9 +135,12 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-            DashboardStats(),
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(5.0),
+            ),
+            SizedBox(height: 100, child: DashboardStats()),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
             ),
             Flexible(child: OptionMenu())
           ])),
