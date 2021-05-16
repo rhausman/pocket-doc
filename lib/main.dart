@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Main Menu',
+      title: 'Dashboard Menu',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -59,6 +59,47 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Widget DashboardStats() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text('Cases: 5', textAlign: TextAlign.center),
+              ),
+              Expanded(
+                child: Text('Glass Minutes: 0', textAlign: TextAlign.center),
+              ),
+            ],
+          ),
+          Row(children: [
+            Expanded(
+              child: Text('Registered as Mentor with 1 mentee',
+                  textAlign: TextAlign.center),
+            )
+          ]),
+          Row(children: [
+            Expanded(child: Text('Progress', textAlign: TextAlign.center)),
+            Expanded(
+                child: SizedBox(
+                    height: 50.0,
+                    child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.all(8),
+                        children: List.generate(
+                            5,
+                            (int index) => Icon(index < 3
+                                ? Icons.favorite
+                                : Icons.favorite_border),
+                            growable: true))))
+          ])
+        ],
+      ),
+    );
+  }
+
   Widget OptionMenu() {
     return GridView.count(
         crossAxisCount: 2,
@@ -86,7 +127,13 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-          child: OptionMenu()),
+          //OptionMenu()
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+            DashboardStats(),
+            Flexible(child: OptionMenu())
+          ])),
 
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
