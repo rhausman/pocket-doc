@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'CaseCalendarPage.dart';
 
 // list of options: Icon [IconData], Text/label [String], fxn that makes a screen that it links to
 var optionsList = [
   [Icons.message, "Whatsapp", () => DetailScreen()],
   [Icons.image, "Albums", () => Dashboard()],
   [Icons.looks, "Visual", () => Dashboard()],
-  [Icons.calendar_today_rounded, "Calendar", () => Dashboard()],
+  [Icons.calendar_today_rounded, "Calendar", () => CaseCalendarPage()],
   [Icons.book, "Performance Log", () => Dashboard()],
   [Icons.format_list_numbered_rounded, "Case Log", () => Dashboard()],
   [Icons.mic, "Dictation", () => Dashboard()],
@@ -77,8 +78,8 @@ class _DashboardState extends State<Dashboard> {
                         children: List.generate(
                             5,
                             (int index) => Icon(index < _counter
-                                ? Icons.favorite
-                                : Icons.favorite_border),
+                                ? Icons.circle
+                                : Icons.add_circle_outline),
                             growable: true))))
           ])
         ],
