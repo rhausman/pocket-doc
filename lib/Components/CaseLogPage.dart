@@ -7,6 +7,28 @@ import 'dart:math';
 final List<Case> _casesSource = [
   Case(1, "Isabella", "203010341803492", DateTime.now(), "No notable notes"),
   Case(2, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
+      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
+  Case(3, "Nicholas Cage", "20000000000",
       DateTime.now().add(const Duration(days: 1)), "No notable notes")
 ];
 
@@ -66,16 +88,22 @@ class _CaseLogPageState extends State<CaseLogPage> {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       primary: true,
-      itemCount: _casesSource.length < 20 ? _casesSource.length : null,
+      itemCount: _casesSource
+          .length, // there's some null option here but idk what it is
       itemBuilder: (BuildContext context, int ix) {
         Case _case = _casesSource[ix]; // get relevant case
         return Container(
-            child: Center(
-                child: Column(children: [
-          Text(_case.name),
-          Text("MR${_case.MRN} on ${DateFormat('kk:mm').format(_case.date)}"),
-          Text(_case.notes.substring(0, min(_case.notes.length, 30)))
-        ])));
+            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            child: Container(
+                color: Colors.blue[300],
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                child: Center(
+                    child: Column(children: [
+                  Text(_case.name),
+                  Text(
+                      "MR${_case.MRN} on ${DateFormat('MM-d-y').format(_case.date)}"),
+                  Text(_case.notes.substring(0, min(_case.notes.length, 30)))
+                ]))));
       },
     );
   }
