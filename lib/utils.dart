@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'dart:collection';
+import 'package:intl/intl.dart';
 
 import 'package:table_calendar/table_calendar.dart';
 
@@ -13,7 +14,8 @@ class Event {
   const Event(this.title, this.startTime, this.endTime);
 
   @override
-  String toString() => title;
+  String toString() =>
+      "${title} | ${DateFormat('kk:mm').format(startTime)} - ${DateFormat('kk:mm').format(endTime)}";
 }
 
 /// Example events.

@@ -88,7 +88,7 @@ class _CaseCalendarState extends State<CaseCalendar> {
   Future<Null> _createEvent() async {
     showTimePicker(
       context: context,
-      initialTime: TimeOfDay(hour: 12, minute: 1),
+      initialTime: TimeOfDay(hour: 12, minute: 0),
     ).then((time) {
       // now we've selected a time, so create the event on the given day, time
       // first, check if there is yet an event list for the selected day
@@ -108,9 +108,7 @@ class _CaseCalendarState extends State<CaseCalendar> {
           timeOfEvent.hour, timeOfEvent.minute);
 
       Event newEvent = Event(
-          "New Event ${timeOfEvent.hour}:${timeOfEvent.minute}",
-          startTime,
-          startTime);
+          "New Event", startTime, startTime.add(const Duration(hours: 1)));
       // add the new event
       kEvents[eventDay]!.add(newEvent);
     });

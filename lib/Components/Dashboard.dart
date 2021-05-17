@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'CaseCalendarPage.dart';
 import 'CaseCalendar.dart';
+import 'CaseLogPage.dart';
 
 // list of options: Icon [IconData], Text/label [String], fxn that makes a screen that it links to
 var optionsList = [
   [Icons.message, "Whatsapp", () => DetailScreen()],
   [Icons.image, "Albums", () => Dashboard()],
   [Icons.looks, "Visual", () => Dashboard()],
-  [Icons.calendar_today_rounded, "Calendar", () => CaseCalendarPage()],
-  [Icons.book, "Performance Log", () => CaseCalendar()],
-  [Icons.format_list_numbered_rounded, "Case Log", () => Dashboard()],
+  [Icons.calendar_today_rounded, "Calendar", () => CaseCalendar()],
+  [Icons.book, "Performance Log", () => CaseCalendarPage()],
+  [Icons.format_list_numbered_rounded, "Case Log", () => CaseLogPage()],
   [Icons.mic, "Dictation", () => Dashboard()],
   [Icons.messenger_outline_sharp, "Messages", () => Dashboard()],
   [Icons.settings, "Settings", () => Dashboard()]
@@ -105,7 +106,7 @@ class _DashboardState extends State<Dashboard> {
             child: Center(
                 child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: [Icon(iconData), Text(label ?? "nothing")]))));
+                    children: [Icon(iconData), Text(label)]))));
   }
 
   Widget OptionMenu() {
