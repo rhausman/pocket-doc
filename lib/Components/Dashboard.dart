@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'CaseCalendarPage.dart';
-import 'events_example.dart';
+import 'CaseCalendar.dart';
 
 // list of options: Icon [IconData], Text/label [String], fxn that makes a screen that it links to
 var optionsList = [
@@ -8,7 +8,7 @@ var optionsList = [
   [Icons.image, "Albums", () => Dashboard()],
   [Icons.looks, "Visual", () => Dashboard()],
   [Icons.calendar_today_rounded, "Calendar", () => CaseCalendarPage()],
-  [Icons.book, "Performance Log", () => TableEventsExample()],
+  [Icons.book, "Performance Log", () => CaseCalendar()],
   [Icons.format_list_numbered_rounded, "Case Log", () => Dashboard()],
   [Icons.mic, "Dictation", () => Dashboard()],
   [Icons.messenger_outline_sharp, "Messages", () => Dashboard()],
@@ -136,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         // Here we take the value from the Dashboard object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title ?? "New Screen"),
+        title: Text(widget.title ?? "New Dashboard"),
       ),
       body: Center(
           // Center is a layout widget. It takes a single child and positions it

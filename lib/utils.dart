@@ -8,8 +8,9 @@ import 'package:table_calendar/table_calendar.dart';
 /// Example event class.
 class Event {
   final String title;
-
-  const Event(this.title);
+  final DateTime startTime;
+  final DateTime endTime;
+  const Event(this.title, this.startTime, this.endTime);
 
   @override
   String toString() => title;
@@ -26,11 +27,13 @@ final kEvents = LinkedHashMap<DateTime, List<Event>>(
 final _kEventSource = Map.fromIterable(List.generate(50, (index) => index),
     key: (item) => DateTime.utc(2020, 10, item * 5),
     value: (item) => List.generate(
-        item % 4 + 1, (index) => Event('Event $item | ${index + 1}')))
+        item % 4 + 1,
+        (index) => Event(
+            'Event $item | ${index + 1}', DateTime.now(), DateTime.now())))
   ..addAll({
     DateTime.now(): [
-      Event('Today\'s Event 1'),
-      Event('Today\'s Event 2'),
+      Event('Today\'s Event 1', DateTime.now(), DateTime.now()),
+      Event('Today\'s Event 2', DateTime.now(), DateTime.now()),
     ],
   });
 
