@@ -91,12 +91,21 @@ class _DashboardState extends State<Dashboard> {
       //int ix = entry.key;
       IconData iconData = entry.value[0];
       String label = entry.value[1];
-      return Container(
-          color: Colors.teal,
-          child: Center(
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [Icon(iconData), Text(label)])));
+      return Material(
+          color: Colors.blue,
+          child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return Dashboard();
+                  }),
+                );
+              },
+              child: Center(
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [Icon(iconData), Text(label ?? "nothing")]))));
     }).toList();
     return GridView.count(
         primary: false,
@@ -119,7 +128,7 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         // Here we take the value from the Dashboard object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.title ?? "New Screen"),
       ),
       body: Center(
           // Center is a layout widget. It takes a single child and positions it
@@ -143,6 +152,23 @@ class _DashboardState extends State<Dashboard> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: FlatButton(
+          child: Text('Pop!'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
     );
   }
 }
