@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'CaseCalendarPage.dart';
+import 'events_example.dart';
 
 // list of options: Icon [IconData], Text/label [String], fxn that makes a screen that it links to
 var optionsList = [
@@ -7,7 +8,7 @@ var optionsList = [
   [Icons.image, "Albums", () => Dashboard()],
   [Icons.looks, "Visual", () => Dashboard()],
   [Icons.calendar_today_rounded, "Calendar", () => CaseCalendarPage()],
-  [Icons.book, "Performance Log", () => Dashboard()],
+  [Icons.book, "Performance Log", () => TableEventsExample()],
   [Icons.format_list_numbered_rounded, "Case Log", () => Dashboard()],
   [Icons.mic, "Dictation", () => Dashboard()],
   [Icons.messenger_outline_sharp, "Messages", () => Dashboard()],
@@ -15,7 +16,7 @@ var optionsList = [
 ];
 
 class Dashboard extends StatefulWidget {
-  Dashboard({Key key, this.title}) : super(key: key);
+  Dashboard({Key? key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -26,7 +27,7 @@ class Dashboard extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final String? title;
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -110,9 +111,9 @@ class _DashboardState extends State<Dashboard> {
   Widget OptionMenu() {
     List<Widget> lst = optionsList.asMap().entries.map((entry) {
       //int ix = entry.key;
-      IconData iconData = entry.value[0];
-      String label = entry.value[1];
-      return optionTile(iconData, label, entry.value[2]);
+      IconData iconData = entry.value[0] as IconData;
+      String label = entry.value[1] as String;
+      return optionTile(iconData, label, entry.value[2] as Widget Function());
     }).toList();
     return GridView.count(
         primary: false,
