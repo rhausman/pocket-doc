@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-// list of options: Icon [IconData], Text/label [String]
+// list of options: Icon [IconData], Text/label [String], fxn that makes a screen that it links to
 var optionsList = [
-  [Icons.message, "Whatsapp"],
-  [Icons.image, "Albums"],
-  [Icons.looks, "Visual"],
-  [Icons.calendar_today_rounded, "Calendar"],
-  [Icons.book, "Performance Log"],
-  [Icons.format_list_numbered_rounded, "Case Log"],
-  [Icons.mic, "Dictation"],
-  [Icons.messenger_outline_sharp, "Messages"],
-  [Icons.settings, "Settings"]
+  [Icons.message, "Whatsapp", () => DetailScreen()],
+  [Icons.image, "Albums", () => Dashboard()],
+  [Icons.looks, "Visual", () => Dashboard()],
+  [Icons.calendar_today_rounded, "Calendar", () => Dashboard()],
+  [Icons.book, "Performance Log", () => Dashboard()],
+  [Icons.format_list_numbered_rounded, "Case Log", () => Dashboard()],
+  [Icons.mic, "Dictation", () => Dashboard()],
+  [Icons.messenger_outline_sharp, "Messages", () => Dashboard()],
+  [Icons.settings, "Settings", () => Dashboard()]
 ];
 
 class Dashboard extends StatefulWidget {
@@ -86,26 +86,32 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
+  // one tile in the Option menu
+  Widget optionTile(
+      IconData iconData, String label, Widget Function() destinationScreen) {
+    return Material(
+        color: Colors.blue,
+        child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return destinationScreen();
+                }),
+              );
+            },
+            child: Center(
+                child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [Icon(iconData), Text(label ?? "nothing")]))));
+  }
+
   Widget OptionMenu() {
     List<Widget> lst = optionsList.asMap().entries.map((entry) {
       //int ix = entry.key;
       IconData iconData = entry.value[0];
       String label = entry.value[1];
-      return Material(
-          color: Colors.blue,
-          child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return Dashboard();
-                  }),
-                );
-              },
-              child: Center(
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [Icon(iconData), Text(label ?? "nothing")]))));
+      return optionTile(iconData, label, entry.value[2]);
     }).toList();
     return GridView.count(
         primary: false,
