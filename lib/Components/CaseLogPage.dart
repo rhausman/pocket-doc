@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/Components/CreateNewCasePage.dart';
 import 'dart:collection';
 
 import 'package:intl/intl.dart';
@@ -10,26 +11,8 @@ final List<Case> _casesSource = [
       DateTime.now().add(const Duration(days: 1)), "No notable notes"),
   Case(3, "Nicholas Cage", "20000000000",
       DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
+  Case(4, "Nicholas Cage", "20000000000",
       DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes"),
-  Case(3, "Nicholas Cage", "20000000000",
-      DateTime.now().add(const Duration(days: 1)), "No notable notes")
 ];
 
 class CaseLogPage extends StatefulWidget {
@@ -71,13 +54,15 @@ class _CaseLogPageState extends State<CaseLogPage> {
 
   // maybe another map mapping notes to case, to make it searchable that way?
 
-  void _incrementCounter() {
+  void _createNewCase(context) async {
+    // Navigator push to a page to enter patient data,
+    // await response from Navigator.pop,
+    // set result equal to a new case
+    Case newCase = await Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => CreateNewCasePage(number: _casesSource.length)));
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
+      // add new case to list and hashmaps
+      _casesSource.add(newCase);
       _counter++;
     });
   }
@@ -85,13 +70,14 @@ class _CaseLogPageState extends State<CaseLogPage> {
   // one tile in the Option menu
 
   Widget CaseLog() {
+    // TODO: use dropdown_search? https://pub.dev/packages/dropdown_search
     return ListView.builder(
       scrollDirection: Axis.vertical,
       primary: true,
       itemCount: _casesSource
           .length, // there's some null option here but idk what it is
       itemBuilder: (BuildContext context, int ix) {
-        Case _case = _casesSource[ix]; // get relevant case
+        Case _case = _casesSource.reversed.toList()[ix]; // get relevant case
         return Container(
             padding: EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Container(
@@ -123,16 +109,16 @@ class _CaseLogPageState extends State<CaseLogPage> {
         title: Text(widget.title ?? "Case Logs"),
       ),
       body: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          //OptionMenu()
-          child: Flexible(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        //OptionMenu()
+
         child: CaseLog(),
-      )),
+      ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () => _createNewCase(context),
+        tooltip: 'New Case',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
